@@ -67,6 +67,14 @@
         .copied-pop {
             animation: pulse-once 0.25s ease-out;
         }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spin-anim {
+            display: inline-block;
+            animation: spin-slow 0.9s linear infinite;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen antialiased selection:bg-orange-500 selection:text-white">
@@ -157,7 +165,7 @@
         <!-- Main Workspace -->
         <div class="flex-1 min-w-0 flex flex-col">
             <!-- Top Navigation Bar -->
-            <header class="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+            <header class="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 lg:px-8 min-h-16 py-2 flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-3 min-w-0">
                     <button
                         type="button"
@@ -169,15 +177,47 @@
                     </button>
                     <div class="min-w-0">
                         <div class="flex items-center gap-2 text-xs text-slate-500 font-semibold">
-                            <span>دليل السكريبتات</span>
-                            <span>/</span>
+                            <span class="hidden sm:inline">دليل السكريبتات</span>
+                            <span class="hidden sm:inline">/</span>
                             <span id="topbar-course-name" class="en-name text-slate-900 font-bold truncate">Coding.J.</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Previous / Next Course Controls -->
-                <div class="flex items-center gap-2 shrink-0">
+                <!-- Cloud Sync Status + Controls + Previous / Next -->
+                <div class="flex flex-wrap items-center gap-2 shrink-0">
+                    <!-- Cloud Status Badge -->
+                    <div id="cloud-status-pill" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition bg-slate-100 text-slate-600 border-slate-200">
+                        <span id="cloud-status-icon">⏳</span>
+                        <span id="cloud-status-text">جاري المزامنة أونلاين...</span>
+                    </div>
+
+                    <!-- Manual Sync Refresh Button -->
+                    <button
+                        id="sync-refresh-btn"
+                        type="button"
+                        onclick="manualRefreshCloud()"
+                        class="w-8 h-8 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center justify-center transition shadow-2xs"
+                        title="تحديث من السحابة الآن"
+                        aria-label="تحديث السكريبتات من السحابة"
+                    >
+                        <span id="sync-refresh-icon">🔄</span>
+                    </button>
+
+                    <!-- Cloud & GitHub Settings Modal Button -->
+                    <button
+                        type="button"
+                        onclick="toggleCloudModal(true)"
+                        class="px-2.5 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1 transition shadow-2xs"
+                        title="إعدادات الحفظ السحابي وربط GitHub"
+                    >
+                        <span>⚙️</span>
+                        <span class="hidden md:inline">الحفظ السحابي</span>
+                    </button>
+
+                    <div class="h-5 w-px bg-slate-200 hidden sm:block mx-0.5"></div>
+
+                    <!-- Previous / Next Course Controls -->
                     <button
                         id="prev-course-btn"
                         type="button"
@@ -188,7 +228,7 @@
                         <span>→</span>
                         <span class="hidden sm:inline">السابق</span>
                     </button>
-                    <span id="course-position-badge" class="text-xs font-bold text-slate-500 px-2 tabular-nums">1 / 25</span>
+                    <span id="course-position-badge" class="text-xs font-bold text-slate-500 px-1.5 tabular-nums">1 / 25</span>
                     <button
                         id="next-course-btn"
                         type="button"
@@ -259,7 +299,7 @@
                         <div class="flex items-center gap-2">
                             <span class="text-base">✏️</span>
                             <h3 class="text-sm font-extrabold text-slate-900">تعديل / إضافة سكريبت الكورس</h3>
-                            <span class="text-[11px] text-slate-500 font-medium hidden sm:inline">(يُحفظ محلياً في المتصفح فوراً)</span>
+                            <span class="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full font-bold hidden sm:inline">☁️ يُحفظ أونلاين لكل الأجهزة</span>
                         </div>
                         <button type="button" onclick="toggleEditor(false)" class="text-xs font-bold text-slate-500 hover:text-slate-800 px-2 py-1 rounded-lg hover:bg-white/80 transition">
                             إغلاق ✕
@@ -281,10 +321,10 @@
                                 <button
                                     id="reset-script-btn"
                                     type="button"
-                                    onclick="resetLocalScript()"
+                                    onclick="clearCurrentCourseScript()"
                                     class="hidden px-3.5 py-2 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-bold transition"
                                 >
-                                    مسح التعديل المحلي
+                                    حذف السكريبت 🗑️
                                 </button>
                                 <button
                                     type="button"
@@ -294,11 +334,12 @@
                                     إلغاء
                                 </button>
                                 <button
+                                    id="save-script-btn"
                                     type="button"
                                     onclick="saveEditedScript()"
-                                    class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-xs transition"
+                                    class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-xs disabled:opacity-60 transition"
                                 >
-                                    <span>💾</span> حفظ السكريبت
+                                    <span>💾</span> حفظ السكريبت أونلاين
                                 </button>
                             </div>
                         </div>
@@ -348,6 +389,90 @@
         </div>
     </div>
 
+    <!-- Cloud & GitHub Sync Settings Modal -->
+    <div id="cloud-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/65 backdrop-blur-xs" role="dialog" aria-modal="true" aria-labelledby="cloud-modal-title">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-lg overflow-hidden">
+            <div class="px-6 py-4 bg-slate-950 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="text-lg">☁️</span>
+                    <h3 id="cloud-modal-title" class="text-sm sm:text-base font-extrabold">إعدادات الحفظ السحابي والمزامنة</h3>
+                </div>
+                <button type="button" onclick="toggleCloudModal(false)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-sm transition" aria-label="إغلاق">
+                    ✕
+                </button>
+            </div>
+
+            <div class="p-6 space-y-5 max-h-[80vh] overflow-y-auto custom-scrollbar">
+                <!-- Zero-config Cloud Sync Info -->
+                <div class="rounded-2xl bg-emerald-50/80 border border-emerald-200 p-4 space-y-1.5">
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs font-extrabold text-emerald-800 flex items-center gap-1.5">
+                            <span>✅</span> المزامنة السحابية التلقائية مفعّلة
+                        </span>
+                        <span id="modal-last-sync" class="text-[11px] font-semibold text-emerald-700"></span>
+                    </div>
+                    <p class="text-xs text-emerald-800/90 leading-relaxed">
+                        أي تعديل أو إضافة بتتحفظ تلقائياً أونلاين وبتظهر عند فتح اللينك من أي موبايل أو كمبيوتر بدون أي إعدادات إضافية.
+                    </p>
+                </div>
+
+                <!-- Optional Direct GitHub Repo Sync -->
+                <div class="rounded-2xl border border-slate-200 p-4 space-y-3.5 bg-slate-50/60">
+                    <div class="flex items-center justify-between gap-2">
+                        <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                            <span>🐙</span> ربط GitHub المباشر (اختياري)
+                        </h4>
+                        <span id="github-link-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">غير مربوط</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                        لو حابة التعديلات تتسجل كمان جوه ملف <code class="font-mono bg-white px-1.5 py-0.5 rounded border border-slate-200 text-slate-700">scripts-data.json</code> داخل مستودع GitHub مباشرة مع كل حفظ، أضيفي GitHub Token (صلاحية <code class="font-mono">repo</code> أو <code class="font-mono">Contents: Read & Write</code>).
+                    </p>
+
+                    <div class="space-y-2.5">
+                        <div>
+                            <label for="gh-repo-input" class="block text-[11px] font-bold text-slate-700 mb-1">المستودع (Owner/Repo)</label>
+                            <input id="gh-repo-input" type="text" dir="ltr" placeholder="megamindAccademy/overview" class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 px-3 py-2 text-xs font-mono bg-white outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div>
+                                <label for="gh-branch-input" class="block text-[11px] font-bold text-slate-700 mb-1">الفرع (Branch)</label>
+                                <input id="gh-branch-input" type="text" dir="ltr" placeholder="main" class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 px-3 py-2 text-xs font-mono bg-white outline-none">
+                            </div>
+                            <div>
+                                <label for="gh-path-input" class="block text-[11px] font-bold text-slate-700 mb-1">مسار الملف</label>
+                                <input id="gh-path-input" type="text" dir="ltr" placeholder="scripts-data.json" class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 px-3 py-2 text-xs font-mono bg-white outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="gh-token-input" class="block text-[11px] font-bold text-slate-700 mb-1">GitHub Personal Access Token</label>
+                            <input id="gh-token-input" type="password" dir="ltr" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 px-3 py-2 text-xs font-mono bg-white outline-none">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 pt-1">
+                        <button type="button" onclick="saveGitHubConfig()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold transition">
+                            حفظ إعدادات GitHub
+                        </button>
+                        <button id="gh-clear-btn" type="button" onclick="clearGitHubConfig()" class="hidden px-3 py-2 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-bold transition">
+                            مسح التوكن
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Download Baked HTML Backup -->
+                <div class="rounded-2xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white">
+                    <div class="space-y-0.5">
+                        <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">نسخة احتياطية كاملة</h4>
+                        <p class="text-[11px] text-slate-500">تنزيل ملف HTML محدث ومُدمج فيه كل السكريبتات الحالية.</p>
+                    </div>
+                    <button type="button" onclick="downloadBakedHtml()" class="px-4 py-2.5 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 text-xs font-extrabold flex items-center justify-center gap-1.5 shrink-0 transition">
+                        <span>📥</span> تحميل ملف HTML شامل السكريبتات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating Toast -->
     <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 pointer-events-none z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl border border-slate-700/80 text-xs sm:text-sm font-bold flex items-center gap-2 transition-all duration-200">
         <span id="toast-message">تم النسخ! ✅</span>
@@ -356,8 +481,8 @@
     <script>
         /**
          * قائمة الكورسات الـ 25 بنفس الترتيب المطلوب تماماً.
-         * لإضافة سكريبت بشكل دائم داخل الملف، ضع النص داخل حقل `script` بين علامتي `...`.
          */
+        // COURSES_DATA_START
         const COURSES_DATA = [
             { id: 1,  name: "Coding.J.",              stage: "Junior", track: "",         script: "" },
             { id: 2,  name: "Coding & AI.J.",         stage: "Junior", track: "",         script: "" },
@@ -385,9 +510,16 @@
             { id: 24, name: "Smart Home.",            stage: "Senior", track: "Robotics", script: "" },
             { id: 25, name: "Smart City.",            stage: "Senior", track: "Robotics", script: "" }
         ];
+        // COURSES_DATA_END
 
-        const STORAGE_KEY_SCRIPTS = "megaminds_course_scripts_overrides_v1";
+        const CLOUD_OBJECT_NAME = "megaminds_academy_course_scripts_v1";
+        const CLOUD_SYNC_URL = "https://api.restful-api.dev/objects/ff808181a09d98f701a1e49f49e14e85";
+        const REPO_JSON_URL = "./scripts-data.json";
+
+        const STORAGE_KEY_CLOUD_CACHE = "megaminds_course_scripts_cloud_v1";
+        const STORAGE_KEY_LEGACY = "megaminds_course_scripts_overrides_v1";
         const STORAGE_KEY_DIR = "megaminds_course_scripts_dir_v1";
+        const STORAGE_KEY_GH = "megaminds_github_config_v1";
 
         let state = {
             selectedId: 1,
@@ -395,31 +527,327 @@
             search: "",
             scriptDir: localStorage.getItem(STORAGE_KEY_DIR) || "auto",
             editorOpen: false,
-            localOverrides: loadOverrides()
+            cloudScripts: {},
+            updatedAt: 0,
+            pendingSync: false,
+            syncStatus: "syncing", // syncing | synced | offline
+            lastSyncTime: null,
+            github: loadGitHubConfig()
         };
 
         let toastTimer = null;
+        let isSyncingNow = false;
 
-        function loadOverrides() {
+        function initLocalCache() {
             try {
-                const raw = localStorage.getItem(STORAGE_KEY_SCRIPTS);
-                return raw ? JSON.parse(raw) : {};
+                const raw = localStorage.getItem(STORAGE_KEY_CLOUD_CACHE);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    state.cloudScripts = parsed.courses || {};
+                    state.updatedAt = Number(parsed.updatedAt) || 0;
+                    state.pendingSync = Boolean(parsed.pendingSync);
+                    return;
+                }
+                const legacyRaw = localStorage.getItem(STORAGE_KEY_LEGACY);
+                if (legacyRaw) {
+                    const legacy = JSON.parse(legacyRaw);
+                    if (legacy && Object.keys(legacy).length > 0) {
+                        const normalized = {};
+                        Object.entries(legacy).forEach(([k, v]) => {
+                            normalized[String(k)] = v;
+                        });
+                        state.cloudScripts = normalized;
+                        state.updatedAt = Date.now();
+                        state.pendingSync = true;
+                        persistLocalCache();
+                    }
+                }
             } catch (e) {
-                return {};
+                state.cloudScripts = {};
+                state.updatedAt = 0;
             }
         }
 
-        function saveOverrides() {
+        function persistLocalCache() {
             try {
-                localStorage.setItem(STORAGE_KEY_SCRIPTS, JSON.stringify(state.localOverrides));
+                localStorage.setItem(STORAGE_KEY_CLOUD_CACHE, JSON.stringify({
+                    updatedAt: state.updatedAt,
+                    pendingSync: state.pendingSync,
+                    courses: state.cloudScripts
+                }));
             } catch (e) {
                 showToast("تعذر الحفظ في ذاكرة المتصفح");
             }
         }
 
+        function loadGitHubConfig() {
+            const defaults = {
+                repo: "megamindAccademy/overview",
+                branch: "main",
+                path: "scripts-data.json",
+                token: ""
+            };
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY_GH);
+                return raw ? { ...defaults, ...JSON.parse(raw) } : defaults;
+            } catch (e) {
+                return defaults;
+            }
+        }
+
+        function setSyncStatus(status) {
+            state.syncStatus = status;
+            if (status === "synced") {
+                state.lastSyncTime = new Date();
+            }
+            renderCloudStatus();
+        }
+
+        function renderCloudStatus() {
+            const pill = document.getElementById("cloud-status-pill");
+            const icon = document.getElementById("cloud-status-icon");
+            const text = document.getElementById("cloud-status-text");
+            const refreshIcon = document.getElementById("sync-refresh-icon");
+            const modalSyncLabel = document.getElementById("modal-last-sync");
+
+            if (state.syncStatus === "syncing") {
+                pill.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition bg-slate-100 text-slate-700 border-slate-200";
+                icon.textContent = "⏳";
+                text.textContent = "جاري المزامنة أونلاين...";
+                refreshIcon.classList.add("spin-anim");
+            } else if (state.syncStatus === "synced") {
+                pill.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition bg-emerald-50 text-emerald-700 border-emerald-200";
+                icon.textContent = "☁️";
+                text.textContent = "محفوظ أونلاين لكل الأجهزة";
+                refreshIcon.classList.remove("spin-anim");
+            } else {
+                pill.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition bg-amber-50 text-amber-800 border-amber-200";
+                icon.textContent = "⚠️";
+                text.textContent = "محفوظ محلياً (تحققي من الإنترنت)";
+                refreshIcon.classList.remove("spin-anim");
+            }
+
+            if (modalSyncLabel) {
+                modalSyncLabel.textContent = state.lastSyncTime
+                    ? `آخر مزامنة: ${state.lastSyncTime.toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" })}`
+                    : "";
+            }
+        }
+
+        async function fetchCloudSnapshot() {
+            const res = await fetch(`${CLOUD_SYNC_URL}?_=${Date.now()}`, {
+                method: "GET",
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error(`Cloud HTTP ${res.status}`);
+            const json = await res.json();
+            const data = json && json.data ? json.data : {};
+            return {
+                updatedAt: Number(data.updatedAt) || 0,
+                courses: data.courses && typeof data.courses === "object" ? data.courses : {}
+            };
+        }
+
+        async function fetchRepoJsonSnapshot() {
+            if (window.location.protocol === "file:") return null;
+            try {
+                const res = await fetch(`${REPO_JSON_URL}?_=${Date.now()}`, {
+                    method: "GET",
+                    cache: "no-store"
+                });
+                if (!res.ok) return null;
+                const data = await res.json();
+                return {
+                    updatedAt: Number(data.updatedAt) || 0,
+                    courses: data.courses && typeof data.courses === "object" ? data.courses : {}
+                };
+            } catch (e) {
+                return null;
+            }
+        }
+
+        async function pushToCloudApi() {
+            const payload = {
+                name: CLOUD_OBJECT_NAME,
+                data: {
+                    updatedAt: state.updatedAt,
+                    courses: state.cloudScripts
+                }
+            };
+            const res = await fetch(CLOUD_SYNC_URL, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) throw new Error(`Cloud PUT ${res.status}`);
+            return await res.json();
+        }
+
+        function utf8ToBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            let bin = "";
+            for (let i = 0; i < bytes.length; i++) {
+                bin += String.fromCharCode(bytes[i]);
+            }
+            return btoa(bin);
+        }
+
+        async function pushToGitHubRepo() {
+            const cfg = state.github;
+            if (!cfg.token || !cfg.repo || !cfg.path) return { skipped: true };
+
+            const apiBase = `https://api.github.com/repos/${cfg.repo.trim()}/contents/${cfg.path.trim()}`;
+            const branch = (cfg.branch || "main").trim();
+            const headers = {
+                "Authorization": `Bearer ${cfg.token.trim()}`,
+                "Accept": "application/vnd.github+json",
+                "Content-Type": "application/json"
+            };
+
+            let sha = null;
+            const getRes = await fetch(`${apiBase}?ref=${encodeURIComponent(branch)}&_=${Date.now()}`, {
+                headers,
+                cache: "no-store"
+            });
+            if (getRes.ok) {
+                const meta = await getRes.json();
+                sha = meta.sha;
+            } else if (getRes.status !== 404) {
+                throw new Error(`GitHub GET ${getRes.status}`);
+            }
+
+            const fileContent = JSON.stringify({
+                updatedAt: state.updatedAt,
+                courses: state.cloudScripts
+            }, null, 2) + "\n";
+
+            const body = {
+                message: `Update course scripts (${new Date().toISOString()})`,
+                content: utf8ToBase64(fileContent),
+                branch
+            };
+            if (sha) body.sha = sha;
+
+            const putRes = await fetch(apiBase, {
+                method: "PUT",
+                headers,
+                body: JSON.stringify(body)
+            });
+            if (!putRes.ok) {
+                const errText = await putRes.text();
+                throw new Error(`GitHub PUT ${putRes.status}: ${errText}`);
+            }
+            return { skipped: false };
+        }
+
+        async function syncFromCloud({ showFeedback = false } = {}) {
+            if (isSyncingNow) return;
+            isSyncingNow = true;
+            setSyncStatus("syncing");
+
+            try {
+                const [cloudRes, repoRes] = await Promise.allSettled([
+                    fetchCloudSnapshot(),
+                    fetchRepoJsonSnapshot()
+                ]);
+
+                const cloudData = cloudRes.status === "fulfilled" ? cloudRes.value : null;
+                const repoData = repoRes.status === "fulfilled" ? repoRes.value : null;
+
+                if (!cloudData && !repoData) {
+                    setSyncStatus("offline");
+                    if (showFeedback) showToast("تعذر الاتصال بالسحابة — يتم عرض النسخة المحلية");
+                    return;
+                }
+
+                let bestRemote = null;
+                if (cloudData && repoData) {
+                    bestRemote = repoData.updatedAt > cloudData.updatedAt ? repoData : cloudData;
+                } else {
+                    bestRemote = cloudData || repoData;
+                }
+
+                if (state.pendingSync && state.updatedAt >= bestRemote.updatedAt) {
+                    // Local has unsynced edits newer than cloud -> merge & push
+                    state.cloudScripts = { ...bestRemote.courses, ...state.cloudScripts };
+                    await pushToCloudApi();
+                    if (state.github.token) {
+                        await pushToGitHubRepo().catch(() => {});
+                    }
+                    state.pendingSync = false;
+                    persistLocalCache();
+                } else if (bestRemote.updatedAt > state.updatedAt || (!state.pendingSync && bestRemote.updatedAt >= state.updatedAt && Object.keys(bestRemote.courses).length > 0)) {
+                    state.cloudScripts = { ...bestRemote.courses };
+                    state.updatedAt = bestRemote.updatedAt;
+                    state.pendingSync = false;
+                    persistLocalCache();
+
+                    if (!state.editorOpen) {
+                        renderAll();
+                    } else {
+                        renderCounters();
+                        renderSidebarList();
+                    }
+                }
+
+                setSyncStatus("synced");
+                if (showFeedback) {
+                    showToast("تم التحديث بأحدث السكريبتات ✅");
+                }
+            } catch (e) {
+                setSyncStatus("offline");
+                if (showFeedback) {
+                    showToast("تعذر التحديث من السحابة");
+                }
+            } finally {
+                isSyncingNow = false;
+            }
+        }
+
+        function manualRefreshCloud() {
+            syncFromCloud({ showFeedback: true });
+        }
+
+        async function pushAllUpdatesOnline(successToastMsg) {
+            setSyncStatus("syncing");
+            let cloudOk = false;
+            let ghWarning = false;
+
+            try {
+                await pushToCloudApi();
+                cloudOk = true;
+                state.pendingSync = false;
+                persistLocalCache();
+            } catch (e) {
+                state.pendingSync = true;
+                persistLocalCache();
+            }
+
+            if (state.github.token) {
+                try {
+                    await pushToGitHubRepo();
+                } catch (e) {
+                    ghWarning = true;
+                }
+            }
+
+            if (cloudOk) {
+                setSyncStatus("synced");
+                if (ghWarning) {
+                    showToast(`${successToastMsg} (تنبيه: تعذر الرفع لـ GitHub، تحققي من التوكن)`);
+                } else {
+                    showToast(successToastMsg);
+                }
+            } else {
+                setSyncStatus("offline");
+                showToast("تم الحفظ محلياً — تعذر الحفظ أونلاين (تحققي من الإنترنت)");
+            }
+        }
+
         function getEffectiveScript(course) {
-            if (Object.prototype.hasOwnProperty.call(state.localOverrides, course.id)) {
-                return state.localOverrides[course.id];
+            const key = String(course.id);
+            if (Object.prototype.hasOwnProperty.call(state.cloudScripts, key)) {
+                return state.cloudScripts[key];
             }
             return course.script || "";
         }
@@ -473,6 +901,8 @@
             renderSidebarList();
             renderMainView();
             renderDirButtons();
+            renderCloudStatus();
+            renderGitHubBadge();
         }
 
         function renderCounters() {
@@ -554,7 +984,6 @@
             const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
             const scriptText = getEffectiveScript(course);
             const filled = scriptText.trim().length > 0;
-            const hasLocalOverride = Object.prototype.hasOwnProperty.call(state.localOverrides, course.id);
 
             // Topbar & position controls
             document.getElementById("topbar-course-name").textContent = course.name;
@@ -618,9 +1047,12 @@
             // Script content view
             const viewContainer = document.getElementById("script-view-container");
             if (filled) {
+                const syncNote = state.pendingSync
+                    ? `<p class="mt-3 text-[11px] text-amber-600 font-semibold flex items-center gap-1.5"><span>⏳</span> محفوظ محلياً — في انتظار الاتصال بالإنترنت للمزامنة.</p>`
+                    : `<p class="mt-3 text-[11px] text-emerald-600 font-semibold flex items-center gap-1.5"><span>☁️</span> متزامن أونلاين ومتاح على جميع الأجهزة.</p>`;
                 viewContainer.innerHTML = `
                     <div id="script-text-box" dir="${state.scriptDir}" class="script-body text-slate-800 text-[15px] sm:text-base bg-slate-50/70 border border-slate-200/80 rounded-2xl p-5 sm:p-6 select-all">${escapeHtml(scriptText)}</div>
-                    ${hasLocalOverride ? `<p class="mt-3 text-[11px] text-slate-400 font-medium flex items-center gap-1.5"><span>💾</span> محفوظ محلياً على هذا المتصفح.</p>` : ""}
+                    ${syncNote}
                 `;
             } else {
                 viewContainer.innerHTML = `
@@ -633,7 +1065,7 @@
                                 لا يوجد سكريبت مضاف لـ <span class="en-name text-orange-600">${escapeHtml(course.name)}</span> حتى الآن
                             </h4>
                             <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                                يمكنكِ إرسال السكريبت الخاص بهذا الكورس لإضافته بشكل دائم هنا، أو الضغط على الزر بالأسفل للصق السكريبت وحفظه فوراً.
+                                اضغطي على الزر بالأسفل لإضافة السكريبت وحفظه أونلاين ليظهر تلقائياً على جميع أجهزتك.
                             </p>
                         </div>
                         <button
@@ -649,7 +1081,7 @@
 
             // Sync editor if currently open
             if (state.editorOpen) {
-                syncEditorFields(course, scriptText, hasLocalOverride);
+                syncEditorFields(course, scriptText);
             }
         }
 
@@ -684,7 +1116,6 @@
             renderMainView();
             toggleSidebar(false);
 
-            // Ensure selected item stays visible in sidebar
             const activeItem = document.querySelector(`.course-item[data-course-id="${id}"]`);
             if (activeItem) {
                 activeItem.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -702,12 +1133,12 @@
             }
         }
 
-        function syncEditorFields(course, scriptText, hasLocalOverride) {
+        function syncEditorFields(course, scriptText) {
             const textarea = document.getElementById("script-editor-input");
             textarea.value = scriptText;
             updateEditorStats();
             const resetBtn = document.getElementById("reset-script-btn");
-            if (hasLocalOverride) {
+            if (scriptText.trim().length > 0) {
                 resetBtn.classList.remove("hidden");
             } else {
                 resetBtn.classList.add("hidden");
@@ -722,8 +1153,7 @@
             if (next) {
                 const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
                 const scriptText = getEffectiveScript(course);
-                const hasLocalOverride = Object.prototype.hasOwnProperty.call(state.localOverrides, course.id);
-                syncEditorFields(course, scriptText, hasLocalOverride);
+                syncEditorFields(course, scriptText);
                 card.classList.remove("hidden");
                 setTimeout(() => document.getElementById("script-editor-input").focus(), 50);
             } else {
@@ -737,25 +1167,178 @@
             document.getElementById("editor-stats").textContent = `${s.chars} حرف • ${s.words} كلمة`;
         }
 
-        function saveEditedScript() {
+        async function saveEditedScript() {
             const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
             const val = document.getElementById("script-editor-input").value;
-            state.localOverrides[course.id] = val;
-            saveOverrides();
+            const key = String(course.id);
+
+            if (val.trim().length === 0 && !(course.script || "").trim()) {
+                delete state.cloudScripts[key];
+            } else {
+                state.cloudScripts[key] = val;
+            }
+
+            state.updatedAt = Date.now();
+            state.pendingSync = true;
+            persistLocalCache();
+
             state.editorOpen = false;
             document.getElementById("editor-card").classList.add("hidden");
             renderAll();
-            showToast(`تم حفظ سكريبت ${course.name} ✅`);
+
+            const saveBtn = document.getElementById("save-script-btn");
+            saveBtn.disabled = true;
+            await pushAllUpdatesOnline(`تم حفظ سكريبت ${course.name} أونلاين ✅`);
+            saveBtn.disabled = false;
+            renderMainView();
         }
 
-        function resetLocalScript() {
+        async function clearCurrentCourseScript() {
             const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
-            delete state.localOverrides[course.id];
-            saveOverrides();
+            const key = String(course.id);
+
+            if ((course.script || "").trim()) {
+                state.cloudScripts[key] = "";
+            } else {
+                delete state.cloudScripts[key];
+            }
+
+            state.updatedAt = Date.now();
+            state.pendingSync = true;
+            persistLocalCache();
+
             state.editorOpen = false;
             document.getElementById("editor-card").classList.add("hidden");
             renderAll();
-            showToast("تم استعادة الحالة الأصلية");
+
+            await pushAllUpdatesOnline(`تم حذف سكريبت ${course.name} أونلاين ✅`);
+            renderMainView();
+        }
+
+        // Cloud & GitHub Settings Modal
+        function renderGitHubBadge() {
+            const badge = document.getElementById("github-link-badge");
+            const clearBtn = document.getElementById("gh-clear-btn");
+            if (!badge) return;
+            if (state.github.token) {
+                badge.textContent = "مربوط بـ GitHub ✅";
+                badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700";
+                if (clearBtn) clearBtn.classList.remove("hidden");
+            } else {
+                badge.textContent = "غير مربوط";
+                badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600";
+                if (clearBtn) clearBtn.classList.add("hidden");
+            }
+        }
+
+        function toggleCloudModal(open) {
+            const modal = document.getElementById("cloud-modal");
+            if (open) {
+                document.getElementById("gh-repo-input").value = state.github.repo || "megamindAccademy/overview";
+                document.getElementById("gh-branch-input").value = state.github.branch || "main";
+                document.getElementById("gh-path-input").value = state.github.path || "scripts-data.json";
+                document.getElementById("gh-token-input").value = state.github.token || "";
+                renderGitHubBadge();
+                renderCloudStatus();
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+            } else {
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+            }
+        }
+
+        async function saveGitHubConfig() {
+            state.github = {
+                repo: document.getElementById("gh-repo-input").value.trim() || "megamindAccademy/overview",
+                branch: document.getElementById("gh-branch-input").value.trim() || "main",
+                path: document.getElementById("gh-path-input").value.trim() || "scripts-data.json",
+                token: document.getElementById("gh-token-input").value.trim()
+            };
+            try {
+                localStorage.setItem(STORAGE_KEY_GH, JSON.stringify(state.github));
+            } catch (e) {}
+            renderGitHubBadge();
+
+            if (state.github.token) {
+                showToast("جاري تجربة الربط وحفظ السكريبتات على GitHub...");
+                try {
+                    await pushToGitHubRepo();
+                    showToast("تم ربط GitHub ومزامنة scripts-data.json بنجاح ✅");
+                } catch (e) {
+                    showToast("تم حفظ الإعدادات لكن تعذر الاتصال بـ GitHub — تأكدي من التوكن");
+                }
+            } else {
+                showToast("تم حفظ الإعدادات");
+            }
+        }
+
+        function clearGitHubConfig() {
+            state.github.token = "";
+            document.getElementById("gh-token-input").value = "";
+            try {
+                localStorage.setItem(STORAGE_KEY_GH, JSON.stringify(state.github));
+            } catch (e) {}
+            renderGitHubBadge();
+            showToast("تم مسح GitHub Token");
+        }
+
+        function buildBakedCoursesBlock() {
+            const lines = COURSES_DATA.map(c => {
+                const eff = getEffectiveScript(c);
+                return `            { id: ${c.id}, name: ${JSON.stringify(c.name)}, stage: ${JSON.stringify(c.stage)}, track: ${JSON.stringify(c.track)}, script: ${JSON.stringify(eff)} }`;
+            });
+            return `// COURSES_DATA_START\n        const COURSES_DATA = [\n${lines.join(",\n")}\n        ];\n        // COURSES_DATA_END`;
+        }
+
+        async function downloadBakedHtml() {
+            let sourceHtml = null;
+            if (window.location.protocol !== "file:") {
+                try {
+                    const res = await fetch(window.location.href.split("#")[0].split("?")[0], { cache: "no-store" });
+                    if (res.ok) {
+                        sourceHtml = await res.text();
+                    }
+                } catch (e) {
+                    sourceHtml = null;
+                }
+            }
+
+            if (!sourceHtml) {
+                const clone = document.documentElement.cloneNode(true);
+                const listEl = clone.querySelector("#course-list");
+                const viewEl = clone.querySelector("#script-view-container");
+                const editorEl = clone.querySelector("#editor-card");
+                const modalEl = clone.querySelector("#cloud-modal");
+                if (listEl) listEl.innerHTML = "<!-- Populated by JS -->";
+                if (viewEl) viewEl.innerHTML = "<!-- Populated by JS -->";
+                if (editorEl) editorEl.classList.add("hidden");
+                if (modalEl) {
+                    modalEl.classList.add("hidden");
+                    modalEl.classList.remove("flex");
+                }
+                clone.querySelectorAll("head style").forEach(st => {
+                    if (st.textContent && st.textContent.includes("--tw-")) {
+                        st.remove();
+                    }
+                });
+                sourceHtml = "<!DOCTYPE html>\n" + clone.outerHTML;
+            }
+
+            const markerRegex = /\/\/ COURSES_DATA_START[\s\S]*?\/\/ COURSES_DATA_END/;
+            const bakedBlock = buildBakedCoursesBlock();
+            const finalHtml = sourceHtml.replace(markerRegex, () => bakedBlock);
+
+            const blob = new Blob([finalHtml], { type: "text/html;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "course-scripts.html";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            showToast("تم تحميل ملف course-scripts.html شاملاً كل السكريبتات ✅");
         }
 
         async function copyCurrentScript(triggerBtn) {
@@ -853,7 +1436,7 @@
             toastTimer = setTimeout(() => {
                 toast.classList.add("opacity-0", "translate-y-4");
                 toast.classList.remove("opacity-100", "translate-y-0");
-            }, 2200);
+            }, 2400);
         }
 
         function clearSearch() {
@@ -900,7 +1483,6 @@
                 renderFilterTabs();
                 renderSidebarList();
 
-                // If current course isn't in the filtered list and filtered list is non-empty, jump to first match
                 const filtered = getFilteredCourses();
                 if (filtered.length > 0 && !filtered.some(c => c.id === state.selectedId)) {
                     state.selectedId = filtered[0].id;
@@ -912,9 +1494,20 @@
 
         document.getElementById("script-editor-input").addEventListener("input", updateEditorStats);
 
+        document.getElementById("cloud-modal").addEventListener("click", e => {
+            if (e.target === e.currentTarget) {
+                toggleCloudModal(false);
+            }
+        });
+
         document.addEventListener("keydown", e => {
             const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
             const isTyping = tag === "input" || tag === "textarea" || tag === "select";
+
+            if (e.key === "Escape") {
+                toggleCloudModal(false);
+                return;
+            }
 
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
                 e.preventDefault();
@@ -934,8 +1527,15 @@
             }
         });
 
-        // Initial render
+        // Sync automatically when returning to the tab
+        window.addEventListener("focus", () => {
+            syncFromCloud({ showFeedback: false });
+        });
+
+        // Boot
+        initLocalCache();
         renderAll();
+        syncFromCloud({ showFeedback: false });
     </script>
 </body>
 </html>
