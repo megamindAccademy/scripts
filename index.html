@@ -1,8 +1,1541 @@
-{
-  "updatedAt": 1794872061258,
-  "courses": {
-    "1": "البرمجة وتصميم الألعاب ..\ncoding..\nPictoBlox\n⭐ هو أول مرحلة من مسار برمجة السوفت وير ..    \n            \n⭐ هو اول الطريق لتعلم البرمجة للاطفال.\n\n⭐ يعتمد على برنامج PicToBlox  وهما من اهم البرامج العالمية لتعليم البرمجة للأطفال.\n\n⭐ التعرف على اساسيات البرمجة وتصميم الالعاب.\n\n⭐ اثناء الدورة هيصمم الطفل العديد من video games خاصه به.\n\n⭐ هنحاول نحول اطفالنا من مستهلكين لمنتجين لالعابهم الخاصة\n\n🔴 المدة الزمنية : 24 ساعة.. 3 شهور ..\n🔴 محاضرة واحده أسبوعيا ً - مدة المحاضرة 2 ساعة.",
-    "2": "📌البرمجة والذكاء الاصطناعي\nCoding & Ai  \nمستمرين معاكم في مسار البرمجة بمستوى جديد البرمجة والذكاء الاصطناعي ..\nإنضم الي دورة الذكاء الاصطناعي للاطفال من امتع الدورات في عصرنا الحالي بعد انتشار الذكاء الاصطناعي والربوتات ، قم بعمل الكثير من المشاريع المختلفه باستخدام ادوات كثيره ومتنوعه .\n\n⭐ هنعرف الفرق بين  الذكاء الاصطناعي وتعليم الاله .\n\n⭐ هنوظف كل حاجه بنتعلمها ونخرج تطبيقات و العاب .\n\n⭐ هنستخدم ادوات   Machine Learning Environment.\n\n⭐ هنعرف ازاي ندرب الكمبيوترونخليه قادر يصنف الصور (Image Classifier) .\n\n⭐ هنعرف ازاي نعمل  Object Detection لاي حاجه حوالينا .\n\n⭐ وهنلعب مع  ai بالعاب باستخدام الاصوات والحركه ونخليه يقدر يفهمها عن طريق (Audio Classifier and Pose Classifier )\n\n🔴 المدة الزمنية : 24 ساعة.. 3 شهور ..\n🔴 محاضرة واحدة اسبوعياً - مدة المحاضرة 2 ساعة.",
-    "3": "📌  تطبيقات الموبيل \nMobile Application \n\n برنامج (App Inventor) الذى أطلقته شركة جوجل وطوره معهد (MIT) الأمريكي ، سيمكن اولادنا من تكوين معرفة كاملة بأساسيات تطوير تطبيقات الموبايل ، مما يتيح لهم تصميم عدة تطبيقات من خلال\n\n⭐ هو ثالث مرحلة في مسار البرمجة بعد مرحلة الذكاء الاصطناعي (AI).\n\n⭐ المدخل الأمثل للتمكن من بناء تطبيقات الموبايل المتنوعة .\n\n⭐ عمل العديد من التطبيقات مثال : \n- الآلة الحاسبة\n- ⁠تطبيق الرسم والتلوين\n- ⁠لعبة فرقعة البالونات (pop the balloon)\n- ⁠لعبة حجرة ورقة مقص\n\n🔴 المدة الزمنية : 24 ساعة .. 3 شهور ..\n🔴 محاضرة واحدة أسبوعيا ً - مدة المحاضرة 2 ساعة .."
-  }
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل سكريبتات الكورسات | Mega Minds Academy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'Tahoma', 'Arial', 'sans-serif'],
+                        en: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', Tahoma, Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .en-name {
+            font-family: 'Inter', 'Cairo', sans-serif;
+            direction: ltr;
+            unicode-bidi: isolate;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.35);
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.6);
+        }
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.32);
+        }
+        .script-body {
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.9;
+        }
+        @keyframes pulse-once {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        .copied-pop {
+            animation: pulse-once 0.25s ease-out;
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spin-anim {
+            display: inline-block;
+            animation: spin-slow 0.9s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen antialiased selection:bg-orange-500 selection:text-white">
+
+    <!-- Mobile Backdrop -->
+    <div id="mobile-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-30 hidden lg:hidden" onclick="toggleSidebar(false)"></div>
+
+    <div class="flex min-h-screen">
+        <!-- Sticky Sidebar (Right side in RTL) -->
+        <aside id="sidebar" class="fixed lg:sticky top-0 right-0 z-40 h-screen w-80 xl:w-[340px] shrink-0 bg-slate-950 text-white flex flex-col border-l border-slate-800 shadow-2xl lg:shadow-none translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
+            <!-- Brand Header -->
+            <div class="p-4 border-b border-slate-800/90 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center font-black text-lg text-white shadow-lg shadow-orange-500/25 shrink-0">
+                        M
+                    </div>
+                    <div class="min-w-0">
+                        <h1 class="text-sm font-extrabold tracking-tight text-white truncate">Mega Minds Academy</h1>
+                        <p class="text-[11px] text-slate-400 font-medium truncate">مكتبة سكريبتات الكورسات</p>
+                    </div>
+                </div>
+                <button type="button" onclick="toggleSidebar(false)" class="lg:hidden w-8 h-8 rounded-lg bg-slate-800/80 text-slate-300 hover:text-white flex items-center justify-center text-sm" aria-label="إغلاق القائمة">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Progress & Search -->
+            <div class="p-3.5 border-b border-slate-800/80 space-y-3 bg-slate-900/40">
+                <!-- Progress Summary -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 flex items-center justify-between text-xs">
+                    <span class="text-slate-300 font-semibold">السكريبتات الجاهزة</span>
+                    <div class="flex items-center gap-2">
+                        <span id="sidebar-added-count" class="font-extrabold text-orange-400 tabular-nums">0 / 25</span>
+                    </div>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative">
+                    <input
+                        id="search-input"
+                        type="text"
+                        placeholder="ابحثي باسم الكورس أو داخل السكريبت..."
+                        class="w-full bg-slate-900 border border-slate-700/80 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 rounded-xl py-2 pr-9 pl-8 text-xs text-white placeholder-slate-400 outline-none transition"
+                    >
+                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none">🔍</span>
+                    <button
+                        id="clear-search-btn"
+                        type="button"
+                        onclick="clearSearch()"
+                        class="hidden absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs w-5 h-5 rounded-full hover:bg-slate-800 items-center justify-center"
+                        title="مسح البحث"
+                    >
+                        ✕
+                    </button>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="grid grid-cols-4 gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800" role="tablist" aria-label="تصفية الكورسات">
+                    <button type="button" data-filter="all" class="filter-tab px-1.5 py-1.5 rounded-lg text-[11px] font-bold transition text-center">
+                        الكل <span class="opacity-75">(25)</span>
+                    </button>
+                    <button type="button" data-filter="Junior" class="filter-tab px-1.5 py-1.5 rounded-lg text-[11px] font-bold transition text-center">
+                        Junior <span class="opacity-75">(7)</span>
+                    </button>
+                    <button type="button" data-filter="Senior" class="filter-tab px-1.5 py-1.5 rounded-lg text-[11px] font-bold transition text-center">
+                        Senior <span class="opacity-75">(18)</span>
+                    </button>
+                    <button type="button" data-filter="filled" class="filter-tab px-1.5 py-1.5 rounded-lg text-[11px] font-bold transition text-center">
+                        المُضاف <span id="filter-filled-count" class="opacity-75">(0)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Courses List -->
+            <nav id="course-list" class="flex-1 overflow-y-auto custom-scrollbar sidebar-scroll p-2.5 space-y-1" aria-label="قائمة الكورسات">
+                <!-- Populated by JS -->
+            </nav>
+
+            <!-- Sidebar Footer -->
+            <div class="p-3 border-t border-slate-800/80 bg-slate-900/50 flex items-center justify-between text-[11px] text-slate-400">
+                <span>التنقل بالأسهم ↑ ↓</span>
+                <a href="./index.html" class="text-orange-400 hover:text-orange-300 font-bold flex items-center gap-1 transition">
+                    <span>⬅</span> لوحة المهام
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <div class="flex-1 min-w-0 flex flex-col">
+            <!-- Top Navigation Bar -->
+            <header class="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 lg:px-8 min-h-16 py-2 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                    <button
+                        type="button"
+                        onclick="toggleSidebar(true)"
+                        class="lg:hidden w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-lg font-bold transition shrink-0"
+                        aria-label="فتح قائمة الكورسات"
+                    >
+                        ☰
+                    </button>
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-2 text-xs text-slate-500 font-semibold">
+                            <span class="hidden sm:inline">دليل السكريبتات</span>
+                            <span class="hidden sm:inline">/</span>
+                            <span id="topbar-course-name" class="en-name text-slate-900 font-bold truncate">Coding.J.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud Sync Status + Controls + Previous / Next -->
+                <div class="flex flex-wrap items-center gap-2 shrink-0">
+                    <!-- Cloud Status Badge -->
+                    <div id="cloud-status-pill" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition bg-slate-100 text-slate-600 border-slate-200">
+                        <span id="cloud-status-icon">⏳</span>
+                        <span id="cloud-status-text">جاري المزامنة أونلاين...</span>
+                    </div>
+
+                    <!-- Manual Sync Refresh Button -->
+                    <button
+                        id="sync-refresh-btn"
+                        type="button"
+                        onclick="manualRefreshCloud()"
+                        class="w-8 h-8 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center justify-center transition shadow-2xs"
+                        title="تحديث من السحابة الآن"
+                        aria-label="تحديث السكريبتات من السحابة"
+                    >
+                        <span id="sync-refresh-icon">🔄</span>
+                    </button>
+
+                    <!-- Cloud & GitHub Settings Modal Button -->
+                    <button
+                        type="button"
+                        onclick="toggleCloudModal(true)"
+                        class="px-2.5 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1 transition shadow-2xs"
+                        title="إعدادات الحفظ السحابي وربط GitHub"
+                    >
+                        <span>⚙️</span>
+                        <span class="hidden md:inline">الحفظ السحابي</span>
+                    </button>
+
+                    <div class="h-5 w-px bg-slate-200 hidden sm:block mx-0.5"></div>
+
+                    <!-- Previous / Next Course Controls -->
+                    <button
+                        id="prev-course-btn"
+                        type="button"
+                        onclick="navigateCourse(-1)"
+                        class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1.5 disabled:opacity-40 disabled:pointer-events-none transition shadow-2xs"
+                        title="الكورس السابق (السهم الأعلى)"
+                    >
+                        <span>→</span>
+                        <span class="hidden sm:inline">السابق</span>
+                    </button>
+                    <span id="course-position-badge" class="text-xs font-bold text-slate-500 px-1.5 tabular-nums">1 / 25</span>
+                    <button
+                        id="next-course-btn"
+                        type="button"
+                        onclick="navigateCourse(1)"
+                        class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1.5 disabled:opacity-40 disabled:pointer-events-none transition shadow-2xs"
+                        title="الكورس التالي (السهم الأسفل)"
+                    >
+                        <span class="hidden sm:inline">التالي</span>
+                        <span>←</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content Container -->
+            <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
+                <!-- Course Header Card -->
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 sm:p-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="space-y-2.5 min-w-0">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span id="course-index-badge" class="inline-flex items-center px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-extrabold font-mono">
+                                    #01
+                                </span>
+                                <span id="course-stage-badge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-extrabold">
+                                    Junior
+                                </span>
+                                <span id="course-track-badge" class="hidden items-center px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-bold">
+                                    Robotics
+                                </span>
+                                <span id="course-status-badge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold">
+                                    <!-- Filled by JS -->
+                                </span>
+                            </div>
+
+                            <h2 id="course-title" class="en-name text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight break-words">
+                                Coding.J.
+                            </h2>
+                        </div>
+
+                        <!-- Primary Action Buttons -->
+                        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+                            <button
+                                id="header-edit-btn"
+                                type="button"
+                                onclick="toggleEditor()"
+                                class="px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-bold flex items-center gap-2 transition"
+                            >
+                                <span>✏️</span>
+                                <span id="header-edit-label">إضافة / تعديل سكريبت</span>
+                            </button>
+
+                            <button
+                                id="header-copy-btn"
+                                type="button"
+                                onclick="copyCurrentScript(this)"
+                                class="px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-white text-xs sm:text-sm font-extrabold flex items-center gap-2 shadow-sm shadow-orange-600/20 disabled:opacity-45 disabled:cursor-not-allowed transition"
+                            >
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-label">نسخ السكريبت</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Inline Editor Card (Hidden by default) -->
+                <section id="editor-card" class="hidden bg-white rounded-2xl border-2 border-orange-300 shadow-sm overflow-hidden">
+                    <div class="px-5 py-3.5 bg-orange-50/70 border-b border-orange-200/80 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-base">✏️</span>
+                            <h3 class="text-sm font-extrabold text-slate-900">تعديل / إضافة سكريبت الكورس</h3>
+                            <span class="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full font-bold hidden sm:inline">☁️ يُحفظ أونلاين لكل الأجهزة</span>
+                        </div>
+                        <button type="button" onclick="toggleEditor(false)" class="text-xs font-bold text-slate-500 hover:text-slate-800 px-2 py-1 rounded-lg hover:bg-white/80 transition">
+                            إغلاق ✕
+                        </button>
+                    </div>
+                    <div class="p-5 space-y-4">
+                        <textarea
+                            id="script-editor-input"
+                            rows="10"
+                            dir="auto"
+                            placeholder="الصقي هنا نص السكريبت الخاص بهذا الكورس..."
+                            class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 p-4 text-sm leading-relaxed text-slate-800 bg-slate-50/50 outline-none resize-y"
+                        ></textarea>
+                        <div class="flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex items-center gap-2 text-xs text-slate-500">
+                                <span id="editor-stats">0 حرف • 0 كلمة</span>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <button
+                                    id="reset-script-btn"
+                                    type="button"
+                                    onclick="clearCurrentCourseScript()"
+                                    class="hidden px-3.5 py-2 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-bold transition"
+                                >
+                                    حذف السكريبت 🗑️
+                                </button>
+                                <button
+                                    type="button"
+                                    onclick="toggleEditor(false)"
+                                    class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold transition"
+                                >
+                                    إلغاء
+                                </button>
+                                <button
+                                    id="save-script-btn"
+                                    type="button"
+                                    onclick="saveEditedScript()"
+                                    class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-xs disabled:opacity-60 transition"
+                                >
+                                    <span>💾</span> حفظ السكريبت أونلاين
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Script Display Card -->
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+                    <!-- Script Card Toolbar -->
+                    <div class="px-5 py-3.5 bg-slate-50/90 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm font-extrabold text-slate-800 flex items-center gap-2">
+                                <span>📄</span> محتوى السكريبت
+                            </span>
+                            <span id="script-meta-stats" class="text-xs font-semibold text-slate-500 bg-white px-2.5 py-0.5 rounded-full border border-slate-200">
+                                فارغ
+                            </span>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-2">
+                            <!-- Text Direction Toggle -->
+                            <div class="inline-flex items-center bg-white border border-slate-200 rounded-xl p-0.5 text-[11px] font-bold" role="group" aria-label="اتجاه النص">
+                                <button type="button" data-dir="auto" onclick="setScriptDir('auto')" class="dir-btn px-2.5 py-1 rounded-lg transition">تلقائي</button>
+                                <button type="button" data-dir="rtl" onclick="setScriptDir('rtl')" class="dir-btn px-2.5 py-1 rounded-lg transition">RTL</button>
+                                <button type="button" data-dir="ltr" onclick="setScriptDir('ltr')" class="dir-btn px-2.5 py-1 rounded-lg transition">LTR</button>
+                            </div>
+
+                            <!-- Card Copy Button -->
+                            <button
+                                id="card-copy-btn"
+                                type="button"
+                                onclick="copyCurrentScript(this)"
+                                class="px-3.5 py-1.5 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 text-xs font-extrabold flex items-center gap-1.5 disabled:opacity-45 disabled:cursor-not-allowed transition"
+                            >
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-label">نسخ</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Script Content Body or Empty Placeholder -->
+                    <div id="script-view-container" class="p-5 sm:p-7 min-h-[340px]">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Cloud & GitHub Sync Settings Modal -->
+    <div id="cloud-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/65 backdrop-blur-xs" role="dialog" aria-modal="true" aria-labelledby="cloud-modal-title">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-lg overflow-hidden">
+            <div class="px-6 py-4 bg-slate-950 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="text-lg">☁️</span>
+                    <h3 id="cloud-modal-title" class="text-sm sm:text-base font-extrabold">إعدادات الحفظ السحابي والمزامنة</h3>
+                </div>
+                <button type="button" onclick="toggleCloudModal(false)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-sm transition" aria-label="إغلاق">
+                    ✕
+                </button>
+            </div>
+
+            <div class="p-6 space-y-5 max-h-[80vh] overflow-y-auto custom-scrollbar">
+                <!-- Zero-config Cloud Sync Info -->
+                <div class="rounded-2xl bg-emerald-50/80 border border-emerald-200 p-4 space-y-1.5">
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs font-extrabold text-emerald-800 flex items-center gap-1.5">
+                            <span>✅</span> المزامنة السحابية التلقائية مفعّلة
+                        </span>
+                        <span id="modal-last-sync" class="text-[11px] font-semibold text-emerald-700"></span>
+                    </div>
+                    <p class="text-xs text-emerald-800/90 leading-relaxed">
+                        أي تعديل أو إضافة بتتحفظ تلقائياً أونلاين وبتظهر عند فتح اللينك من أي موبايل أو كمبيوتر بدون أي إعدادات إضافية.
+                    </p>
+                </div>
+
+                <!-- Optional Direct GitHub Repo Sync -->
+                <div class="rounded-2xl border border-slate-200 p-4 space-y-3.5 bg-slate-50/60">
+                    <div class="flex items-center justify-between gap-2">
+                        <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                            <span>🐙</span> ربط GitHub المباشر (اختياري)
+                        </h4>
+                        <span id="github-link-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">غير مربوط</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                        لو حابة التعديلات تتسجل كمان جوه ملف <code class="font-mono bg-white px-1.5 py-0.5 rounded border border-slate-200 text-slate-700">scripts-data.json</code> داخل مستودع GitHub مباشرة مع كل حفظ، أضيفي GitHub Token (صلاحية <code class="font-mono">repo</code> أو <code class="font-mono">Contents: Read & Write</code>).
+                    </p>
+
+                    <div class="space-y-2.5">
+                        <div>
+                            <label for="gh-repo-input" class="block text-[11px] font-bold text-slate-700 mb-1">المستودع (Owner/Repo)</label>
+                            <input id="gh-repo-input" type="text" dir="ltr" placeholder="megamindAccademy/overview" class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 px-3 py-2 text-xs font-mono bg-white outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div>
+                                <label for="gh-branch-input" class="block text-[11px] font-bold text-slate-700 mb-1">الفرع (Branch)</label>
+                                <input id="gh-branch-input" type="text" dir="ltr" placeholder="main" class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 px-3 py-2 text-xs font-mono bg-white outline-none">
+                            </div>
+                            <div>
+                                <label for="gh-path-input" class="block text-[11px] font-bold text-slate-700 mb-1">مسار الملف</label>
+                                <input id="gh-path-input" type="text" dir="ltr" placeholder="scripts-data.json" class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 px-3 py-2 text-xs font-mono bg-white outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="gh-token-input" class="block text-[11px] font-bold text-slate-700 mb-1">GitHub Personal Access Token</label>
+                            <input id="gh-token-input" type="password" dir="ltr" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" class="w-full rounded-xl border border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 px-3 py-2 text-xs font-mono bg-white outline-none">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 pt-1">
+                        <button type="button" onclick="saveGitHubConfig()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold transition">
+                            حفظ إعدادات GitHub
+                        </button>
+                        <button id="gh-clear-btn" type="button" onclick="clearGitHubConfig()" class="hidden px-3 py-2 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-bold transition">
+                            مسح التوكن
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Download Baked HTML Backup -->
+                <div class="rounded-2xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white">
+                    <div class="space-y-0.5">
+                        <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">نسخة احتياطية كاملة</h4>
+                        <p class="text-[11px] text-slate-500">تنزيل ملف HTML محدث ومُدمج فيه كل السكريبتات الحالية.</p>
+                    </div>
+                    <button type="button" onclick="downloadBakedHtml()" class="px-4 py-2.5 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 text-xs font-extrabold flex items-center justify-center gap-1.5 shrink-0 transition">
+                        <span>📥</span> تحميل ملف HTML شامل السكريبتات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Toast -->
+    <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-4 opacity-0 pointer-events-none z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl border border-slate-700/80 text-xs sm:text-sm font-bold flex items-center gap-2 transition-all duration-200">
+        <span id="toast-message">تم النسخ! ✅</span>
+    </div>
+
+    <script>
+        /**
+         * قائمة الكورسات الـ 25 بنفس الترتيب المطلوب تماماً.
+         */
+        // COURSES_DATA_START
+        const COURSES_DATA = [
+            { id: 1,  name: "Coding.J.",              stage: "Junior", track: "",         script: "" },
+            { id: 2,  name: "Coding & AI.J.",         stage: "Junior", track: "",         script: "" },
+            { id: 3,  name: "Mobile App.J.",          stage: "Junior", track: "",         script: "" },
+            { id: 4,  name: "3D & XR Studio.J.",      stage: "Junior", track: "",         script: "" },
+            { id: 5,  name: "Python.J.",              stage: "Junior", track: "",         script: "" },
+            { id: 6,  name: "Mobile App.",            stage: "Senior", track: "",         script: "" },
+            { id: 7,  name: "Python.",                stage: "Senior", track: "",         script: "" },
+            { id: 8,  name: "Problem Solving.",       stage: "Senior", track: "",         script: "" },
+            { id: 9,  name: "AI & Machine Learning.", stage: "Senior", track: "",         script: "" },
+            { id: 10, name: "Godot",                  stage: "Senior", track: "",         script: "" },
+            { id: 11, name: "Cyber Security.",        stage: "Senior", track: "",         script: "" },
+            { id: 12, name: "Network & Hacking.",     stage: "Senior", track: "",         script: "" },
+            { id: 13, name: "Unity.",                 stage: "Senior", track: "",         script: "" },
+            { id: 14, name: "UI & UX.",               stage: "Senior", track: "",         script: "" },
+            { id: 15, name: "Web Design.",            stage: "Senior", track: "",         script: "" },
+            { id: 16, name: "Web Advanced.",          stage: "Senior", track: "",         script: "" },
+            { id: 17, name: "React JS.",              stage: "Senior", track: "",         script: "" },
+            { id: 18, name: "Back-End Web.",          stage: "Senior", track: "",         script: "" },
+            { id: 19, name: "Flutter.",               stage: "Senior", track: "",         script: "" },
+            { id: 20, name: "Back-End Mobile.",       stage: "Senior", track: "",         script: "" },
+            { id: 21, name: "Mega Explorers.J.",      stage: "Junior", track: "Robotics", script: "" },
+            { id: 22, name: "Mega Inventors.J.",      stage: "Junior", track: "Robotics", script: "" },
+            { id: 23, name: "Robo Masters.",          stage: "Senior", track: "Robotics", script: "" },
+            { id: 24, name: "Smart Home.",            stage: "Senior", track: "Robotics", script: "" },
+            { id: 25, name: "Smart City.",            stage: "Senior", track: "Robotics", script: "" }
+        ];
+        // COURSES_DATA_END
+
+        const CLOUD_OBJECT_NAME = "megaminds_academy_course_scripts_v1";
+        const CLOUD_SYNC_URL = "https://api.restful-api.dev/objects/ff808181a09d98f701a1e49f49e14e85";
+        const REPO_JSON_URL = "./scripts-data.json";
+
+        const STORAGE_KEY_CLOUD_CACHE = "megaminds_course_scripts_cloud_v1";
+        const STORAGE_KEY_LEGACY = "megaminds_course_scripts_overrides_v1";
+        const STORAGE_KEY_DIR = "megaminds_course_scripts_dir_v1";
+        const STORAGE_KEY_GH = "megaminds_github_config_v1";
+
+        let state = {
+            selectedId: 1,
+            filter: "all",
+            search: "",
+            scriptDir: localStorage.getItem(STORAGE_KEY_DIR) || "auto",
+            editorOpen: false,
+            cloudScripts: {},
+            updatedAt: 0,
+            pendingSync: false,
+            syncStatus: "syncing", // syncing | synced | offline
+            lastSyncTime: null,
+            github: loadGitHubConfig()
+        };
+
+        let toastTimer = null;
+        let isSyncingNow = false;
+
+        function initLocalCache() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY_CLOUD_CACHE);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    state.cloudScripts = parsed.courses || {};
+                    state.updatedAt = Number(parsed.updatedAt) || 0;
+                    state.pendingSync = Boolean(parsed.pendingSync);
+                    return;
+                }
+                const legacyRaw = localStorage.getItem(STORAGE_KEY_LEGACY);
+                if (legacyRaw) {
+                    const legacy = JSON.parse(legacyRaw);
+                    if (legacy && Object.keys(legacy).length > 0) {
+                        const normalized = {};
+                        Object.entries(legacy).forEach(([k, v]) => {
+                            normalized[String(k)] = v;
+                        });
+                        state.cloudScripts = normalized;
+                        state.updatedAt = Date.now();
+                        state.pendingSync = true;
+                        persistLocalCache();
+                    }
+                }
+            } catch (e) {
+                state.cloudScripts = {};
+                state.updatedAt = 0;
+            }
+        }
+
+        function persistLocalCache() {
+            try {
+                localStorage.setItem(STORAGE_KEY_CLOUD_CACHE, JSON.stringify({
+                    updatedAt: state.updatedAt,
+                    pendingSync: state.pendingSync,
+                    courses: state.cloudScripts
+                }));
+            } catch (e) {
+                showToast("تعذر الحفظ في ذاكرة المتصفح");
+            }
+        }
+
+        function loadGitHubConfig() {
+            const defaults = {
+                repo: "megamindAccademy/overview",
+                branch: "main",
+                path: "scripts-data.json",
+                token: ""
+            };
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY_GH);
+                return raw ? { ...defaults, ...JSON.parse(raw) } : defaults;
+            } catch (e) {
+                return defaults;
+            }
+        }
+
+        function setSyncStatus(status) {
+            state.syncStatus = status;
+            if (status === "synced") {
+                state.lastSyncTime = new Date();
+            }
+            renderCloudStatus();
+        }
+
+        function renderCloudStatus() {
+            const pill = document.getElementById("cloud-status-pill");
+            const icon = document.getElementById("cloud-status-icon");
+            const text = document.getElementById("cloud-status-text");
+            const refreshIcon = document.getElementById("sync-refresh-icon");
+            const modalSyncLabel = document.getElementById("modal-last-sync");
+
+            if (state.syncStatus === "syncing") {
+                pill.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition bg-slate-100 text-slate-700 border-slate-200";
+                icon.textContent = "⏳";
+                text.textContent = "جاري المزامنة أونلاين...";
+                refreshIcon.classList.add("spin-anim");
+            } else if (state.syncStatus === "synced") {
+                pill.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition bg-emerald-50 text-emerald-700 border-emerald-200";
+                icon.textContent = "☁️";
+                text.textContent = "محفوظ أونلاين لكل الأجهزة";
+                refreshIcon.classList.remove("spin-anim");
+            } else {
+                pill.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition bg-amber-50 text-amber-800 border-amber-200";
+                icon.textContent = "⚠️";
+                text.textContent = "محفوظ محلياً (تحققي من الإنترنت)";
+                refreshIcon.classList.remove("spin-anim");
+            }
+
+            if (modalSyncLabel) {
+                modalSyncLabel.textContent = state.lastSyncTime
+                    ? `آخر مزامنة: ${state.lastSyncTime.toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" })}`
+                    : "";
+            }
+        }
+
+        async function fetchCloudSnapshot() {
+            const res = await fetch(`${CLOUD_SYNC_URL}?_=${Date.now()}`, {
+                method: "GET",
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error(`Cloud HTTP ${res.status}`);
+            const json = await res.json();
+            const data = json && json.data ? json.data : {};
+            return {
+                updatedAt: Number(data.updatedAt) || 0,
+                courses: data.courses && typeof data.courses === "object" ? data.courses : {}
+            };
+        }
+
+        async function fetchRepoJsonSnapshot() {
+            if (window.location.protocol === "file:") return null;
+            try {
+                const res = await fetch(`${REPO_JSON_URL}?_=${Date.now()}`, {
+                    method: "GET",
+                    cache: "no-store"
+                });
+                if (!res.ok) return null;
+                const data = await res.json();
+                return {
+                    updatedAt: Number(data.updatedAt) || 0,
+                    courses: data.courses && typeof data.courses === "object" ? data.courses : {}
+                };
+            } catch (e) {
+                return null;
+            }
+        }
+
+        async function pushToCloudApi() {
+            const payload = {
+                name: CLOUD_OBJECT_NAME,
+                data: {
+                    updatedAt: state.updatedAt,
+                    courses: state.cloudScripts
+                }
+            };
+            const res = await fetch(CLOUD_SYNC_URL, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) throw new Error(`Cloud PUT ${res.status}`);
+            return await res.json();
+        }
+
+        function utf8ToBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            let bin = "";
+            for (let i = 0; i < bytes.length; i++) {
+                bin += String.fromCharCode(bytes[i]);
+            }
+            return btoa(bin);
+        }
+
+        async function pushToGitHubRepo() {
+            const cfg = state.github;
+            if (!cfg.token || !cfg.repo || !cfg.path) return { skipped: true };
+
+            const apiBase = `https://api.github.com/repos/${cfg.repo.trim()}/contents/${cfg.path.trim()}`;
+            const branch = (cfg.branch || "main").trim();
+            const headers = {
+                "Authorization": `Bearer ${cfg.token.trim()}`,
+                "Accept": "application/vnd.github+json",
+                "Content-Type": "application/json"
+            };
+
+            let sha = null;
+            const getRes = await fetch(`${apiBase}?ref=${encodeURIComponent(branch)}&_=${Date.now()}`, {
+                headers,
+                cache: "no-store"
+            });
+            if (getRes.ok) {
+                const meta = await getRes.json();
+                sha = meta.sha;
+            } else if (getRes.status !== 404) {
+                throw new Error(`GitHub GET ${getRes.status}`);
+            }
+
+            const fileContent = JSON.stringify({
+                updatedAt: state.updatedAt,
+                courses: state.cloudScripts
+            }, null, 2) + "\n";
+
+            const body = {
+                message: `Update course scripts (${new Date().toISOString()})`,
+                content: utf8ToBase64(fileContent),
+                branch
+            };
+            if (sha) body.sha = sha;
+
+            const putRes = await fetch(apiBase, {
+                method: "PUT",
+                headers,
+                body: JSON.stringify(body)
+            });
+            if (!putRes.ok) {
+                const errText = await putRes.text();
+                throw new Error(`GitHub PUT ${putRes.status}: ${errText}`);
+            }
+            return { skipped: false };
+        }
+
+        async function syncFromCloud({ showFeedback = false } = {}) {
+            if (isSyncingNow) return;
+            isSyncingNow = true;
+            setSyncStatus("syncing");
+
+            try {
+                const [cloudRes, repoRes] = await Promise.allSettled([
+                    fetchCloudSnapshot(),
+                    fetchRepoJsonSnapshot()
+                ]);
+
+                const cloudData = cloudRes.status === "fulfilled" ? cloudRes.value : null;
+                const repoData = repoRes.status === "fulfilled" ? repoRes.value : null;
+
+                if (!cloudData && !repoData) {
+                    setSyncStatus("offline");
+                    if (showFeedback) showToast("تعذر الاتصال بالسحابة — يتم عرض النسخة المحلية");
+                    return;
+                }
+
+                let bestRemote = null;
+                if (cloudData && repoData) {
+                    bestRemote = repoData.updatedAt > cloudData.updatedAt ? repoData : cloudData;
+                } else {
+                    bestRemote = cloudData || repoData;
+                }
+
+                if (state.pendingSync && state.updatedAt >= bestRemote.updatedAt) {
+                    // Local has unsynced edits newer than cloud -> merge & push
+                    state.cloudScripts = { ...bestRemote.courses, ...state.cloudScripts };
+                    await pushToCloudApi();
+                    if (state.github.token) {
+                        await pushToGitHubRepo().catch(() => {});
+                    }
+                    state.pendingSync = false;
+                    persistLocalCache();
+                } else if (bestRemote.updatedAt > state.updatedAt || (!state.pendingSync && bestRemote.updatedAt >= state.updatedAt && Object.keys(bestRemote.courses).length > 0)) {
+                    state.cloudScripts = { ...bestRemote.courses };
+                    state.updatedAt = bestRemote.updatedAt;
+                    state.pendingSync = false;
+                    persistLocalCache();
+
+                    if (!state.editorOpen) {
+                        renderAll();
+                    } else {
+                        renderCounters();
+                        renderSidebarList();
+                    }
+                }
+
+                setSyncStatus("synced");
+                if (showFeedback) {
+                    showToast("تم التحديث بأحدث السكريبتات ✅");
+                }
+            } catch (e) {
+                setSyncStatus("offline");
+                if (showFeedback) {
+                    showToast("تعذر التحديث من السحابة");
+                }
+            } finally {
+                isSyncingNow = false;
+            }
+        }
+
+        function manualRefreshCloud() {
+            syncFromCloud({ showFeedback: true });
+        }
+
+        async function pushAllUpdatesOnline(successToastMsg) {
+            setSyncStatus("syncing");
+            let cloudOk = false;
+            let ghWarning = false;
+
+            try {
+                await pushToCloudApi();
+                cloudOk = true;
+                state.pendingSync = false;
+                persistLocalCache();
+            } catch (e) {
+                state.pendingSync = true;
+                persistLocalCache();
+            }
+
+            if (state.github.token) {
+                try {
+                    await pushToGitHubRepo();
+                } catch (e) {
+                    ghWarning = true;
+                }
+            }
+
+            if (cloudOk) {
+                setSyncStatus("synced");
+                if (ghWarning) {
+                    showToast(`${successToastMsg} (تنبيه: تعذر الرفع لـ GitHub، تحققي من التوكن)`);
+                } else {
+                    showToast(successToastMsg);
+                }
+            } else {
+                setSyncStatus("offline");
+                showToast("تم الحفظ محلياً — تعذر الحفظ أونلاين (تحققي من الإنترنت)");
+            }
+        }
+
+        function getEffectiveScript(course) {
+            const key = String(course.id);
+            if (Object.prototype.hasOwnProperty.call(state.cloudScripts, key)) {
+                return state.cloudScripts[key];
+            }
+            return course.script || "";
+        }
+
+        function hasScript(course) {
+            return getEffectiveScript(course).trim().length > 0;
+        }
+
+        function getFilteredCourses() {
+            const q = state.search.trim().toLowerCase();
+            return COURSES_DATA.filter(course => {
+                if (state.filter === "Junior" && course.stage !== "Junior") return false;
+                if (state.filter === "Senior" && course.stage !== "Senior") return false;
+                if (state.filter === "filled" && !hasScript(course)) return false;
+
+                if (q) {
+                    const nameMatch = course.name.toLowerCase().includes(q);
+                    const scriptMatch = getEffectiveScript(course).toLowerCase().includes(q);
+                    const trackMatch = course.track && course.track.toLowerCase().includes(q);
+                    return nameMatch || scriptMatch || trackMatch;
+                }
+                return true;
+            });
+        }
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function formatIndex(num) {
+            return String(num).padStart(2, "0");
+        }
+
+        function getStats(text) {
+            const trimmed = text.trim();
+            if (!trimmed) return { chars: 0, words: 0, lines: 0 };
+            const chars = trimmed.length;
+            const words = trimmed.split(/\s+/).filter(Boolean).length;
+            const lines = trimmed.split(/\r?\n/).length;
+            return { chars, words, lines };
+        }
+
+        function renderAll() {
+            renderCounters();
+            renderFilterTabs();
+            renderSidebarList();
+            renderMainView();
+            renderDirButtons();
+            renderCloudStatus();
+            renderGitHubBadge();
+        }
+
+        function renderCounters() {
+            const filledCount = COURSES_DATA.filter(hasScript).length;
+            document.getElementById("sidebar-added-count").textContent = `${filledCount} / ${COURSES_DATA.length}`;
+            document.getElementById("filter-filled-count").textContent = `(${filledCount})`;
+        }
+
+        function renderFilterTabs() {
+            document.querySelectorAll(".filter-tab").forEach(btn => {
+                const isActive = btn.dataset.filter === state.filter;
+                if (isActive) {
+                    btn.className = "filter-tab px-1.5 py-1.5 rounded-lg text-[11px] font-extrabold transition text-center bg-orange-600 text-white shadow-xs";
+                } else {
+                    btn.className = "filter-tab px-1.5 py-1.5 rounded-lg text-[11px] font-bold transition text-center text-slate-400 hover:text-white hover:bg-slate-800/80";
+                }
+            });
+        }
+
+        function renderSidebarList() {
+            const container = document.getElementById("course-list");
+            const filtered = getFilteredCourses();
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="py-10 px-4 text-center space-y-2">
+                        <div class="text-2xl">🔎</div>
+                        <p class="text-xs font-bold text-slate-300">لا توجد كورسات مطابقة</p>
+                        <p class="text-[11px] text-slate-500">جرّبي مسح البحث أو تغيير الفلتر</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(course => {
+                const isSelected = course.id === state.selectedId;
+                const filled = hasScript(course);
+                const dotClass = filled
+                    ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.65)]"
+                    : "bg-slate-600";
+
+                const stageBadge = course.stage === "Junior"
+                    ? "bg-amber-500/15 text-amber-300 border-amber-500/25"
+                    : "bg-sky-500/15 text-sky-300 border-sky-500/25";
+
+                const rowClasses = isSelected
+                    ? "bg-gradient-to-l from-orange-600/25 to-orange-500/10 border-orange-500/60 text-white shadow-xs"
+                    : "border-transparent text-slate-300 hover:bg-slate-900 hover:text-white";
+
+                const numClasses = isSelected
+                    ? "bg-orange-500 text-white"
+                    : "bg-slate-800/90 text-slate-400 group-hover:text-slate-200";
+
+                return `
+                    <button
+                        type="button"
+                        data-course-id="${course.id}"
+                        onclick="selectCourse(${course.id})"
+                        class="course-item group w-full text-right flex items-center justify-between gap-2.5 px-2.5 py-2.5 rounded-xl border transition ${rowClasses}"
+                    >
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <span class="w-6 h-6 rounded-lg text-[10px] font-mono font-bold flex items-center justify-center shrink-0 transition ${numClasses}">
+                                ${formatIndex(course.id)}
+                            </span>
+                            <span class="en-name text-[13px] font-semibold truncate">${escapeHtml(course.name)}</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <span class="px-1.5 py-0.5 rounded-md text-[10px] font-bold border ${stageBadge}">
+                                ${course.stage}
+                            </span>
+                            <span class="w-2 h-2 rounded-full ${dotClass}" title="${filled ? 'تم إضافة السكريبت' : 'بانتظار السكريبت'}"></span>
+                        </div>
+                    </button>
+                `;
+            }).join("");
+        }
+
+        function renderMainView() {
+            const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
+            const scriptText = getEffectiveScript(course);
+            const filled = scriptText.trim().length > 0;
+
+            // Topbar & position controls
+            document.getElementById("topbar-course-name").textContent = course.name;
+
+            const filtered = getFilteredCourses();
+            const currentPosInFiltered = filtered.findIndex(c => c.id === course.id);
+            const navList = currentPosInFiltered !== -1 ? filtered : COURSES_DATA;
+            const navIndex = currentPosInFiltered !== -1 ? currentPosInFiltered : COURSES_DATA.findIndex(c => c.id === course.id);
+
+            document.getElementById("course-position-badge").textContent = `${navIndex + 1} / ${navList.length}`;
+            document.getElementById("prev-course-btn").disabled = navIndex <= 0;
+            document.getElementById("next-course-btn").disabled = navIndex >= navList.length - 1;
+
+            // Header card details
+            document.getElementById("course-index-badge").textContent = `#${formatIndex(course.id)}`;
+            document.getElementById("course-title").textContent = course.name;
+
+            const stageBadgeEl = document.getElementById("course-stage-badge");
+            stageBadgeEl.textContent = course.stage;
+            stageBadgeEl.className = course.stage === "Junior"
+                ? "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 border border-amber-200"
+                : "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-sky-100 text-sky-800 border border-sky-200";
+
+            const trackBadgeEl = document.getElementById("course-track-badge");
+            if (course.track) {
+                trackBadgeEl.textContent = `🤖 ${course.track}`;
+                trackBadgeEl.className = "inline-flex items-center px-2.5 py-0.5 rounded-full bg-violet-100 text-violet-800 border border-violet-200 text-xs font-bold";
+            } else {
+                trackBadgeEl.className = "hidden";
+            }
+
+            const statusBadgeEl = document.getElementById("course-status-badge");
+            if (filled) {
+                statusBadgeEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span> جاهز للنسخ`;
+                statusBadgeEl.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200";
+            } else {
+                statusBadgeEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500"></span> بانتظار إضافة السكريبت`;
+                statusBadgeEl.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200";
+            }
+
+            // Copy buttons state
+            const headerCopyBtn = document.getElementById("header-copy-btn");
+            const cardCopyBtn = document.getElementById("card-copy-btn");
+            headerCopyBtn.disabled = !filled;
+            cardCopyBtn.disabled = !filled;
+
+            // Edit button label
+            document.getElementById("header-edit-label").textContent = filled ? "تعديل السكريبت" : "إضافة سكريبت";
+
+            // Script stats
+            const stats = getStats(scriptText);
+            const statsEl = document.getElementById("script-meta-stats");
+            if (filled) {
+                statsEl.textContent = `${stats.words} كلمة • ${stats.chars} حرف`;
+                statsEl.className = "text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200";
+            } else {
+                statsEl.textContent = "فارغ";
+                statsEl.className = "text-xs font-semibold text-slate-500 bg-white px-2.5 py-0.5 rounded-full border border-slate-200";
+            }
+
+            // Script content view
+            const viewContainer = document.getElementById("script-view-container");
+            if (filled) {
+                const syncNote = state.pendingSync
+                    ? `<p class="mt-3 text-[11px] text-amber-600 font-semibold flex items-center gap-1.5"><span>⏳</span> محفوظ محلياً — في انتظار الاتصال بالإنترنت للمزامنة.</p>`
+                    : `<p class="mt-3 text-[11px] text-emerald-600 font-semibold flex items-center gap-1.5"><span>☁️</span> متزامن أونلاين ومتاح على جميع الأجهزة.</p>`;
+                viewContainer.innerHTML = `
+                    <div id="script-text-box" dir="${state.scriptDir}" class="script-body text-slate-800 text-[15px] sm:text-base bg-slate-50/70 border border-slate-200/80 rounded-2xl p-5 sm:p-6 select-all">${escapeHtml(scriptText)}</div>
+                    ${syncNote}
+                `;
+            } else {
+                viewContainer.innerHTML = `
+                    <div class="h-full min-h-[260px] rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/60 flex flex-col items-center justify-center text-center p-6 sm:p-10 space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-200/80 text-orange-600 flex items-center justify-center text-2xl">
+                            📝
+                        </div>
+                        <div class="space-y-1.5 max-w-md">
+                            <h4 class="text-base font-extrabold text-slate-800">
+                                لا يوجد سكريبت مضاف لـ <span class="en-name text-orange-600">${escapeHtml(course.name)}</span> حتى الآن
+                            </h4>
+                            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                اضغطي على الزر بالأسفل لإضافة السكريبت وحفظه أونلاين ليظهر تلقائياً على جميع أجهزتك.
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            onclick="toggleEditor(true)"
+                            class="px-4 py-2.5 rounded-xl bg-white hover:bg-orange-50 text-orange-700 border border-orange-200 text-xs font-extrabold flex items-center gap-2 shadow-2xs transition"
+                        >
+                            <span>✏️</span> إضافة سكريبت الآن
+                        </button>
+                    </div>
+                `;
+            }
+
+            // Sync editor if currently open
+            if (state.editorOpen) {
+                syncEditorFields(course, scriptText);
+            }
+        }
+
+        function renderDirButtons() {
+            document.querySelectorAll(".dir-btn").forEach(btn => {
+                const active = btn.dataset.dir === state.scriptDir;
+                if (active) {
+                    btn.className = "dir-btn px-2.5 py-1 rounded-lg transition bg-slate-900 text-white";
+                } else {
+                    btn.className = "dir-btn px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800";
+                }
+            });
+        }
+
+        function setScriptDir(dir) {
+            state.scriptDir = dir;
+            try {
+                localStorage.setItem(STORAGE_KEY_DIR, dir);
+            } catch (e) {}
+            const box = document.getElementById("script-text-box");
+            if (box) {
+                box.setAttribute("dir", dir);
+            }
+            renderDirButtons();
+        }
+
+        function selectCourse(id) {
+            state.selectedId = id;
+            state.editorOpen = false;
+            document.getElementById("editor-card").classList.add("hidden");
+            renderSidebarList();
+            renderMainView();
+            toggleSidebar(false);
+
+            const activeItem = document.querySelector(`.course-item[data-course-id="${id}"]`);
+            if (activeItem) {
+                activeItem.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            }
+        }
+
+        function navigateCourse(delta) {
+            const filtered = getFilteredCourses();
+            const list = filtered.length > 0 ? filtered : COURSES_DATA;
+            let idx = list.findIndex(c => c.id === state.selectedId);
+            if (idx === -1) idx = 0;
+            const nextIdx = idx + delta;
+            if (nextIdx >= 0 && nextIdx < list.length) {
+                selectCourse(list[nextIdx].id);
+            }
+        }
+
+        function syncEditorFields(course, scriptText) {
+            const textarea = document.getElementById("script-editor-input");
+            textarea.value = scriptText;
+            updateEditorStats();
+            const resetBtn = document.getElementById("reset-script-btn");
+            if (scriptText.trim().length > 0) {
+                resetBtn.classList.remove("hidden");
+            } else {
+                resetBtn.classList.add("hidden");
+            }
+        }
+
+        function toggleEditor(forceState) {
+            const next = typeof forceState === "boolean" ? forceState : !state.editorOpen;
+            state.editorOpen = next;
+            const card = document.getElementById("editor-card");
+
+            if (next) {
+                const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
+                const scriptText = getEffectiveScript(course);
+                syncEditorFields(course, scriptText);
+                card.classList.remove("hidden");
+                setTimeout(() => document.getElementById("script-editor-input").focus(), 50);
+            } else {
+                card.classList.add("hidden");
+            }
+        }
+
+        function updateEditorStats() {
+            const val = document.getElementById("script-editor-input").value;
+            const s = getStats(val);
+            document.getElementById("editor-stats").textContent = `${s.chars} حرف • ${s.words} كلمة`;
+        }
+
+        async function saveEditedScript() {
+            const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
+            const val = document.getElementById("script-editor-input").value;
+            const key = String(course.id);
+
+            if (val.trim().length === 0 && !(course.script || "").trim()) {
+                delete state.cloudScripts[key];
+            } else {
+                state.cloudScripts[key] = val;
+            }
+
+            state.updatedAt = Date.now();
+            state.pendingSync = true;
+            persistLocalCache();
+
+            state.editorOpen = false;
+            document.getElementById("editor-card").classList.add("hidden");
+            renderAll();
+
+            const saveBtn = document.getElementById("save-script-btn");
+            saveBtn.disabled = true;
+            await pushAllUpdatesOnline(`تم حفظ سكريبت ${course.name} أونلاين ✅`);
+            saveBtn.disabled = false;
+            renderMainView();
+        }
+
+        async function clearCurrentCourseScript() {
+            const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
+            const key = String(course.id);
+
+            if ((course.script || "").trim()) {
+                state.cloudScripts[key] = "";
+            } else {
+                delete state.cloudScripts[key];
+            }
+
+            state.updatedAt = Date.now();
+            state.pendingSync = true;
+            persistLocalCache();
+
+            state.editorOpen = false;
+            document.getElementById("editor-card").classList.add("hidden");
+            renderAll();
+
+            await pushAllUpdatesOnline(`تم حذف سكريبت ${course.name} أونلاين ✅`);
+            renderMainView();
+        }
+
+        // Cloud & GitHub Settings Modal
+        function renderGitHubBadge() {
+            const badge = document.getElementById("github-link-badge");
+            const clearBtn = document.getElementById("gh-clear-btn");
+            if (!badge) return;
+            if (state.github.token) {
+                badge.textContent = "مربوط بـ GitHub ✅";
+                badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700";
+                if (clearBtn) clearBtn.classList.remove("hidden");
+            } else {
+                badge.textContent = "غير مربوط";
+                badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600";
+                if (clearBtn) clearBtn.classList.add("hidden");
+            }
+        }
+
+        function toggleCloudModal(open) {
+            const modal = document.getElementById("cloud-modal");
+            if (open) {
+                document.getElementById("gh-repo-input").value = state.github.repo || "megamindAccademy/overview";
+                document.getElementById("gh-branch-input").value = state.github.branch || "main";
+                document.getElementById("gh-path-input").value = state.github.path || "scripts-data.json";
+                document.getElementById("gh-token-input").value = state.github.token || "";
+                renderGitHubBadge();
+                renderCloudStatus();
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+            } else {
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+            }
+        }
+
+        async function saveGitHubConfig() {
+            state.github = {
+                repo: document.getElementById("gh-repo-input").value.trim() || "megamindAccademy/overview",
+                branch: document.getElementById("gh-branch-input").value.trim() || "main",
+                path: document.getElementById("gh-path-input").value.trim() || "scripts-data.json",
+                token: document.getElementById("gh-token-input").value.trim()
+            };
+            try {
+                localStorage.setItem(STORAGE_KEY_GH, JSON.stringify(state.github));
+            } catch (e) {}
+            renderGitHubBadge();
+
+            if (state.github.token) {
+                showToast("جاري تجربة الربط وحفظ السكريبتات على GitHub...");
+                try {
+                    await pushToGitHubRepo();
+                    showToast("تم ربط GitHub ومزامنة scripts-data.json بنجاح ✅");
+                } catch (e) {
+                    showToast("تم حفظ الإعدادات لكن تعذر الاتصال بـ GitHub — تأكدي من التوكن");
+                }
+            } else {
+                showToast("تم حفظ الإعدادات");
+            }
+        }
+
+        function clearGitHubConfig() {
+            state.github.token = "";
+            document.getElementById("gh-token-input").value = "";
+            try {
+                localStorage.setItem(STORAGE_KEY_GH, JSON.stringify(state.github));
+            } catch (e) {}
+            renderGitHubBadge();
+            showToast("تم مسح GitHub Token");
+        }
+
+        function buildBakedCoursesBlock() {
+            const lines = COURSES_DATA.map(c => {
+                const eff = getEffectiveScript(c);
+                return `            { id: ${c.id}, name: ${JSON.stringify(c.name)}, stage: ${JSON.stringify(c.stage)}, track: ${JSON.stringify(c.track)}, script: ${JSON.stringify(eff)} }`;
+            });
+            return `// COURSES_DATA_START\n        const COURSES_DATA = [\n${lines.join(",\n")}\n        ];\n        // COURSES_DATA_END`;
+        }
+
+        async function downloadBakedHtml() {
+            let sourceHtml = null;
+            if (window.location.protocol !== "file:") {
+                try {
+                    const res = await fetch(window.location.href.split("#")[0].split("?")[0], { cache: "no-store" });
+                    if (res.ok) {
+                        sourceHtml = await res.text();
+                    }
+                } catch (e) {
+                    sourceHtml = null;
+                }
+            }
+
+            if (!sourceHtml) {
+                const clone = document.documentElement.cloneNode(true);
+                const listEl = clone.querySelector("#course-list");
+                const viewEl = clone.querySelector("#script-view-container");
+                const editorEl = clone.querySelector("#editor-card");
+                const modalEl = clone.querySelector("#cloud-modal");
+                if (listEl) listEl.innerHTML = "<!-- Populated by JS -->";
+                if (viewEl) viewEl.innerHTML = "<!-- Populated by JS -->";
+                if (editorEl) editorEl.classList.add("hidden");
+                if (modalEl) {
+                    modalEl.classList.add("hidden");
+                    modalEl.classList.remove("flex");
+                }
+                clone.querySelectorAll("head style").forEach(st => {
+                    if (st.textContent && st.textContent.includes("--tw-")) {
+                        st.remove();
+                    }
+                });
+                sourceHtml = "<!DOCTYPE html>\n" + clone.outerHTML;
+            }
+
+            const markerRegex = /\/\/ COURSES_DATA_START[\s\S]*?\/\/ COURSES_DATA_END/;
+            const bakedBlock = buildBakedCoursesBlock();
+            const finalHtml = sourceHtml.replace(markerRegex, () => bakedBlock);
+
+            const blob = new Blob([finalHtml], { type: "text/html;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "course-scripts.html";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            showToast("تم تحميل ملف course-scripts.html شاملاً كل السكريبتات ✅");
+        }
+
+        async function copyCurrentScript(triggerBtn) {
+            const course = COURSES_DATA.find(c => c.id === state.selectedId) || COURSES_DATA[0];
+            const text = getEffectiveScript(course);
+
+            if (!text.trim()) {
+                showToast("لا يوجد سكريبت لنسخه بعد");
+                return;
+            }
+
+            let copied = false;
+            if (navigator.clipboard && window.isSecureContext) {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    copied = true;
+                } catch (e) {
+                    copied = false;
+                }
+            }
+
+            if (!copied) {
+                try {
+                    const ta = document.createElement("textarea");
+                    ta.value = text;
+                    ta.setAttribute("readonly", "");
+                    ta.style.position = "fixed";
+                    ta.style.top = "-9999px";
+                    ta.style.left = "-9999px";
+                    ta.style.opacity = "0";
+                    document.body.appendChild(ta);
+                    ta.focus();
+                    ta.select();
+                    ta.setSelectionRange(0, ta.value.length);
+                    copied = document.execCommand("copy");
+                    document.body.removeChild(ta);
+                } catch (e) {
+                    copied = false;
+                }
+            }
+
+            if (copied) {
+                showCopySuccessOnButtons(triggerBtn);
+                showToast(`تم نسخ سكريبت ${course.name} ✅`);
+            } else {
+                showToast("تعذر النسخ التلقائي — حدّدي النص واضغطي Ctrl+C");
+            }
+        }
+
+        function showCopySuccessOnButtons(triggerBtn) {
+            const btns = [
+                document.getElementById("header-copy-btn"),
+                document.getElementById("card-copy-btn")
+            ];
+
+            btns.forEach(btn => {
+                if (!btn) return;
+                const iconEl = btn.querySelector(".copy-icon");
+                const labelEl = btn.querySelector(".copy-label");
+                if (!btn.dataset.origLabel) btn.dataset.origLabel = labelEl.textContent;
+                if (!btn.dataset.origIcon) btn.dataset.origIcon = iconEl.textContent;
+
+                iconEl.textContent = "✅";
+                labelEl.textContent = "تم النسخ!";
+                btn.classList.add("copied-pop");
+                if (btn.id === "header-copy-btn") {
+                    btn.classList.remove("bg-orange-600", "hover:bg-orange-500");
+                    btn.classList.add("bg-emerald-600", "hover:bg-emerald-500");
+                }
+            });
+
+            setTimeout(() => {
+                btns.forEach(btn => {
+                    if (!btn) return;
+                    const iconEl = btn.querySelector(".copy-icon");
+                    const labelEl = btn.querySelector(".copy-label");
+                    iconEl.textContent = btn.dataset.origIcon || "📋";
+                    labelEl.textContent = btn.dataset.origLabel || "نسخ";
+                    btn.classList.remove("copied-pop");
+                    if (btn.id === "header-copy-btn") {
+                        btn.classList.remove("bg-emerald-600", "hover:bg-emerald-500");
+                        btn.classList.add("bg-orange-600", "hover:bg-orange-500");
+                    }
+                });
+            }, 1800);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            document.getElementById("toast-message").textContent = msg;
+            toast.classList.remove("opacity-0", "translate-y-4");
+            toast.classList.add("opacity-100", "translate-y-0");
+
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add("opacity-0", "translate-y-4");
+                toast.classList.remove("opacity-100", "translate-y-0");
+            }, 2400);
+        }
+
+        function clearSearch() {
+            const input = document.getElementById("search-input");
+            input.value = "";
+            state.search = "";
+            document.getElementById("clear-search-btn").classList.add("hidden");
+            document.getElementById("clear-search-btn").classList.remove("flex");
+            renderSidebarList();
+            renderMainView();
+            input.focus();
+        }
+
+        function toggleSidebar(open) {
+            const sidebar = document.getElementById("sidebar");
+            const backdrop = document.getElementById("mobile-backdrop");
+            if (open) {
+                sidebar.classList.remove("translate-x-full");
+                backdrop.classList.remove("hidden");
+            } else {
+                sidebar.classList.add("translate-x-full");
+                backdrop.classList.add("hidden");
+            }
+        }
+
+        // Event Listeners
+        document.getElementById("search-input").addEventListener("input", e => {
+            state.search = e.target.value;
+            const clearBtn = document.getElementById("clear-search-btn");
+            if (state.search.length > 0) {
+                clearBtn.classList.remove("hidden");
+                clearBtn.classList.add("flex");
+            } else {
+                clearBtn.classList.add("hidden");
+                clearBtn.classList.remove("flex");
+            }
+            renderSidebarList();
+            renderMainView();
+        });
+
+        document.querySelectorAll(".filter-tab").forEach(btn => {
+            btn.addEventListener("click", () => {
+                state.filter = btn.dataset.filter;
+                renderFilterTabs();
+                renderSidebarList();
+
+                const filtered = getFilteredCourses();
+                if (filtered.length > 0 && !filtered.some(c => c.id === state.selectedId)) {
+                    state.selectedId = filtered[0].id;
+                    renderSidebarList();
+                }
+                renderMainView();
+            });
+        });
+
+        document.getElementById("script-editor-input").addEventListener("input", updateEditorStats);
+
+        document.getElementById("cloud-modal").addEventListener("click", e => {
+            if (e.target === e.currentTarget) {
+                toggleCloudModal(false);
+            }
+        });
+
+        document.addEventListener("keydown", e => {
+            const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+            const isTyping = tag === "input" || tag === "textarea" || tag === "select";
+
+            if (e.key === "Escape") {
+                toggleCloudModal(false);
+                return;
+            }
+
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+                e.preventDefault();
+                toggleSidebar(true);
+                document.getElementById("search-input").focus();
+                return;
+            }
+
+            if (!isTyping) {
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    navigateCourse(1);
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    navigateCourse(-1);
+                }
+            }
+        });
+
+        // Sync automatically when returning to the tab
+        window.addEventListener("focus", () => {
+            syncFromCloud({ showFeedback: false });
+        });
+
+        // Boot
+        initLocalCache();
+        renderAll();
+        syncFromCloud({ showFeedback: false });
+    </script>
+</body>
+</html>
